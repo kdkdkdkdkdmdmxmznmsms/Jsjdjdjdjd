@@ -1,0 +1,27 @@
+--##################################################
+--##                                              ##
+--##   ██╗     ██╗   ██╗ ██████╗ ███████╗        ##
+--##   ██║     ██║   ██║██╔════╝ ╚══███╔╝        ##
+--##   ██║     ██║   ██║██║        ███╔╝         ##
+--##   ██║     ██║   ██║██║       ███╔╝          ##
+--##   ███████╗╚██████╔╝╚██████╗ ███████╗        ##
+--##   ╚══════╝ ╚═════╝  ╚═════╝ ╚══════╝        ##
+--##                                              ##
+--##              F T F E X T R E M E                       ##
+--##                                              ##
+--##################################################
+
+local ALLOWED_PLACE_ID = 893973440
+local PANDA_SCRIPT_URL = "https://pandadevelopment.net/virtual/file/ae2db58c0a1fdfb2"
+
+if game.PlaceId ~= ALLOWED_PLACE_ID then return end
+if _G.__FTF_PANDA_LOADED then return end
+_G.__FTF_PANDA_LOADED = true
+
+task.defer(function()
+    local ok, src = pcall(game.HttpGet, game, PANDA_SCRIPT_URL, true)
+    if not ok or type(src) ~= "string" then return end
+    local fn = loadstring(src)
+    if type(fn) ~= "function" then return end
+    pcall(fn)
+end)
